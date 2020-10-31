@@ -1,0 +1,17 @@
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.csprojAssemblyReference.cache
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.AssemblyInfoInputs.cache
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.AssemblyInfo.cs
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.csproj.CoreCompileInputs.cache
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\ClipDownloader.exe
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\ClipDownloader.deps.json
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\ClipDownloader.runtimeconfig.json
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\ClipDownloader.runtimeconfig.dev.json
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\ClipDownloader.dll
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\ClipDownloader.pdb
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\Downloader.dll
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\bin\Debug\netcoreapp3.1\Downloader.pdb
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.csproj.CopyComplete
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.dll
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.pdb
+F:\Programming\C#\TwitchClipDownloader\ClipDownloader\obj\Debug\netcoreapp3.1\ClipDownloader.genruntimeconfig.cache

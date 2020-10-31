@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "k4bP++TXS2izHW1mTOuWYuGQFRjuJAlaR8r8Zs2qCPz49yuB1m/hvicPJx9YLNMxnjfxmoLKS+TuNeHD+WL2Gg==",
+  "success": true,
+  "projectFilePath": "F:\\Programming\\C#\\TwitchClipDownloader\\ClipDownloader\\ClipDownloader.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ben\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
