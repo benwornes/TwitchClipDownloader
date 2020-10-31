@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.ComponentModel;
 using System.Net;
+using System.Threading;
 
 namespace Downloader
 {
@@ -74,8 +75,9 @@ namespace Downloader
             }
 
 
-            bool authError = true; // Have to execute at least once
-            while (authError) // Executres until the GetHttpResponse goes through
+            bool authError = true; // Has to execute at least once
+            // Executes until the GetHttpResponse goes through
+            while (authError)
             {
                 authError = false;
                 try
@@ -193,6 +195,8 @@ namespace Downloader
                 string url = GetClipURL(clips[i]);
                 client.DownloadFileAsync(new Uri(url), String.Format("{0}{1}.mp4", outputPath, clips[i].id)); // Downloads files Asynchronously
             }
+
+            Thread.Sleep(150*1000);
         }
 
         private string GetClipURL(ClipInfo clip)

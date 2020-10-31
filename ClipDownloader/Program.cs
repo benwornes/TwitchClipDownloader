@@ -13,8 +13,6 @@ namespace ClipDownloader
             Console.WriteLine("Enter your output path");
             string outputPath = Console.ReadLine();
 
-
-
             Download download = new Download(clientID, authentication, outputPath);
 
             await download.StartDownload();
