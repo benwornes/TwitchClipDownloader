@@ -103,8 +103,6 @@ namespace Downloader
 
 
             DownloadClips();
-            Console.WriteLine("Done");
-            Console.ReadLine();
         }
 
         public void GetQueries()
@@ -193,8 +191,7 @@ namespace Downloader
             {
                 client = new WebClient();
                 string url = GetClipURL(clips[i]);
-                //client.DownloadFile(url, String.Format("{0}{1}.mp4", outputPath, clips[i].id));
-                client.DownloadFileAsync(new Uri(url), String.Format("{0}{1}.mp4", outputPath, clips[i].id));
+                client.DownloadFileAsync(new Uri(url), String.Format("{0}{1}.mp4", outputPath, clips[i].id)); // Downloads files Asynchronously
             }
         }
 
