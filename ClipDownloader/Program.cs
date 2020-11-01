@@ -17,8 +17,8 @@ namespace ClipDownloader
             Data data = new Data(clientID, authentication, outputPath);
             Console.WriteLine(data.OutputPath);
 
-            //await JsonGenerator.Generate(data);
-            FileDownloader.DownloadAllFiles(data);
+            await JsonGenerator.Generate(data);
+            await FileDownloader.DownloadAllFiles(data);
         }
     }
 }

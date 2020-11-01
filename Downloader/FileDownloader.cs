@@ -11,7 +11,7 @@ namespace Downloader
     {
         private static Data data;
         private static List<Task> tasks;
-        public async static void DownloadAllFiles(Data clientData)
+        public async static Task DownloadAllFiles(Data clientData)
         {
             data = clientData;
 
