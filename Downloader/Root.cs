@@ -7,5 +7,4 @@ namespace Downloader
         public List<ClipInfo> data { get; set; }
         public Pagination pagination { get; set; }
     }
-
 }
