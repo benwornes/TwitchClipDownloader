@@ -9,6 +9,6 @@ E.g, "game\_id=510218", The query to search for Among Us clips.
 
 In the future, I plan to implement a feature that will allow someone to search clips
 without knowing the specific query.
-E.g, including a method that will take in a game name and return game_id
+E.g, including a method that will take in a game name and return game\_id
 
 ## If you have any features you want to be added, create an issue and request them!
