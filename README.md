@@ -3,7 +3,7 @@
 ## Features
 As of the latest version, this program is a simple command line project
 to download clips from twitch given a query.
-E.g, "game\\_id=510218", The query to search for Among Us clips.
+E.g, "game\_id=510218", The query to search for Among Us clips.
 
 ## PlansToImplement
 
