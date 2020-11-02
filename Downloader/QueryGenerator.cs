@@ -40,6 +40,7 @@ namespace Downloader
                         idQuery = "game_id=" + await GetGameID();
                         break;
                     case "C":
+                        idQuery = "broadcaster_id=" + await GetChannelID();
                         break;
                     default:
                         validResponse = false;
@@ -69,9 +70,31 @@ namespace Downloader
             string responseContnet = await responseMessage.Content.ReadAsStringAsync();
             Root<GameInfo> gameInfo = JsonConvert.DeserializeObject<Root<GameInfo>>(responseContnet);
 
-            // Only one item is ever goign to be in the List<GameInfo>
-            // so we take the 0th index
-            return gameInfo.Data[0].id;
+            // gameInfo.Data is a List<GameInfo>
+            // There is only ever going to be one item in
+            // this list so we take the 0th index
+            return gameInfo.Data[0].Id;
+        }
+
+        private async static Task<string> GetChannelID()
+        {
+            Console.Write("Please enter the name of the streamer: ");
+            string channelName = Console.ReadLine();
+
+            HttpClient client = new HttpClient();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, apiURL + "users?login=" + channelName);
+            requestMessage.Headers.Add("client-id", data.ClientID);
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", data.Authentication);
+
+            HttpResponseMessage responseMessage = await client.SendAsync(requestMessage);
+
+            string responseContent = await responseMessage.Content.ReadAsStringAsync();
+            Root<ChannelInfo> channelInfo = JsonConvert.DeserializeObject<Root<ChannelInfo>>(responseContent);
+
+            // channelInfo.Data is a List<ChannelInfo>
+            // There is only ever going to be one item in
+            // this list so we take the 0th index
+            return channelInfo.Data[0].Id;
         }
     }
 }
