@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Downloader
@@ -17,6 +19,8 @@ namespace Downloader
         private static Data data;
         private static string idQuery = null;
         private static string numClipsQuery = null;
+        private static string startedAtQuery = null;
+        private static string endedAtQuery = null;
 
         public async static Task Generate(Data clientData)
         {
@@ -31,6 +35,7 @@ namespace Downloader
                 Console.WriteLine("Would you like to find the top clips of:");
                 Console.WriteLine("A Game - G");
                 Console.WriteLine("A Channel - C");
+                Console.WriteLine("Please enter either G or C");
 
                 response = Console.ReadLine().ToUpper();
             }
@@ -49,8 +54,13 @@ namespace Downloader
             }
 
             GetNumClipsQuery();
+            GetStartedAtTimeQuery();
+            if (startedAtQuery != String.Empty)
+            {
+                GetEndedAtTimeQuery();
+            }
 
-            data.QueryURL = apiURL + "clips?" + idQuery + numClipsQuery;
+            data.QueryURL = apiURL + "clips?" + idQuery + numClipsQuery + startedAtQuery + endedAtQuery;
         }
         /// <summary>
         /// Generates QueryGenerator.idQuery from gameName input via Console
@@ -104,6 +114,9 @@ namespace Downloader
             idQuery = "broadcaster_id=" + channelInfo.Data[0].Id;
         }
 
+        /// <summary>
+        /// Generates the QueryGenerator.numClipsQuery from numClips input via Console
+        /// </summary>
         private static void GetNumClipsQuery()
         {
             int numClips = 0;
@@ -120,5 +133,56 @@ namespace Downloader
 
             numClipsQuery = "&first=" + numClips.ToString();
         }
+
+        private static void GetStartedAtTimeQuery()
+        {
+            string timeframeType = null;
+            while (timeframeType != "A" && timeframeType != "C")
+            {
+                Console.Clear();
+                Console.WriteLine("What would you like your time frame to be:");
+                Console.WriteLine("All-Time - A");
+                Console.WriteLine("Custom-Time - C");
+                Console.WriteLine("Please enter either A of C");
+                timeframeType = Console.ReadLine().ToUpper();
+            }
+
+            if (timeframeType == "A")
+            {
+                startedAtQuery = String.Empty;
+                // If you want to get the top clips of all time,
+                // you don't add the optional started_at query parameter
+                return;
+            }
+
+            // The Twitch API requires times to be in the RFC3339 format
+            // However, the seconds value is ignored
+
+            Console.WriteLine("How many days ago would you like to start at?");
+            int numDays = Convert.ToInt32(Console.ReadLine());
+            string startAtTime = GetRFC3339Time(DateTime.Now.AddDays(-numDays));
+
+            startedAtQuery = "&started_at=" + startAtTime;
+        }
+
+        private static void GetEndedAtTimeQuery()
+        {
+            Console.WriteLine("How many days would you like to search for?");
+            int numDays = Convert.ToInt32(Console.ReadLine());
+
+            // startedAtQuery = "&started_at=yyyy-MM-ddTHH:mm:ss"
+            // We need to pass in the time, not the &started_at=
+            DateTime startedAtTime = XmlConvert.ToDateTime(startedAtQuery.Substring(12, startedAtQuery.Length - 12));
+            string endedAtTime = GetRFC3339Time(startedAtTime.AddDays(numDays));
+
+            endedAtQuery = "&ended_at=" + endedAtTime;
+        }
+
+        private static string GetRFC3339Time(DateTime dateTime)
+        {
+            //RFC3339 is of the following yyyy-MM-ddTHH:mm:ss
+            return XmlConvert.ToString(dateTime, "yyyy-MM-ddTHH:mm:ssZ");
+        }
+
     }
 }
