@@ -15,43 +15,47 @@ namespace Downloader
     {
         private static string apiURL = "https://api.twitch.tv/helix/";
         private static Data data;
+        private static string idQuery = null;
+        private static string numClipsQuery = null;
 
         public async static Task Generate(Data clientData)
         {
             data = clientData;
             string response = null;
-            bool validResponse = false;
-            string idQuery = null;
 
-            while (!validResponse)
+
+            // Loops until either G or C is chosen by user
+            while (response != "G" && response != "C")
             {
-                validResponse = true;
-
                 Console.Clear();
                 Console.WriteLine("Would you like to find the top clips of:");
                 Console.WriteLine("A Game - G");
                 Console.WriteLine("A Channel - C");
 
                 response = Console.ReadLine().ToUpper();
-
-                switch (response)
-                {
-                    case "G":
-                        idQuery = "game_id=" + await GetGameID();
-                        break;
-                    case "C":
-                        idQuery = "broadcaster_id=" + await GetChannelID();
-                        break;
-                    default:
-                        validResponse = false;
-                        break;
-                }
             }
 
-            data.QueryURL = apiURL + "clips?" + idQuery;
-        }
 
-        private async static Task<string> GetGameID()
+            switch (response)
+            {
+                case "G":
+                    await GetGameID();
+                    break;
+                case "C":
+                    await GetChannelID();
+                    break;
+                default:
+                    break;
+            }
+
+            GetNumClipsQuery();
+
+            data.QueryURL = apiURL + "clips?" + idQuery + numClipsQuery;
+        }
+        /// <summary>
+        /// Generates QueryGenerator.idQuery from gameName input via Console
+        /// </summary>
+        private async static Task GetGameID()
         {
             Console.Write("Please enter the game name: ");
             string gameName = Console.ReadLine();
@@ -73,10 +77,13 @@ namespace Downloader
             // gameInfo.Data is a List<GameInfo>
             // There is only ever going to be one item in
             // this list so we take the 0th index
-            return gameInfo.Data[0].Id;
+            idQuery = "game_id=" + gameInfo.Data[0].Id;
         }
 
-        private async static Task<string> GetChannelID()
+        /// <summary>
+        /// Generates QueryGenerator.idQuery from channelName input via Console
+        /// </summary>
+        private async static Task GetChannelID()
         {
             Console.Write("Please enter the name of the streamer: ");
             string channelName = Console.ReadLine();
@@ -94,7 +101,24 @@ namespace Downloader
             // channelInfo.Data is a List<ChannelInfo>
             // There is only ever going to be one item in
             // this list so we take the 0th index
-            return channelInfo.Data[0].Id;
+            idQuery = "broadcaster_id=" + channelInfo.Data[0].Id;
+        }
+
+        private static void GetNumClipsQuery()
+        {
+            int numClips = 0;
+
+            Console.Clear();
+            Console.WriteLine("How many clips would you like to download? (1-100 inclusive)");
+            numClips = Convert.ToInt32(Console.ReadLine());
+
+            if (numClips < 1 || numClips > 100)
+            {
+                GetNumClipsQuery();
+                return;
+            }
+
+            numClipsQuery = "&first=" + numClips.ToString();
         }
     }
 }
