@@ -14,7 +14,7 @@ namespace Downloader
         public string JsonFile { get; set; }
         public string ClientID { get; private set; }
         public string Authentication { get; private set; }
-        public string QueryURL { get; private set; }
+        public string QueryURL { get; set; }
         
 
         public Data()

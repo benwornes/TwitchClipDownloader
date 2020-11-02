@@ -16,6 +16,13 @@ namespace Downloader
         // The file will then be generated.
         private static Data data;
 
+        /// <summary>
+        /// <para>Creates .json file in OutputPath directory.</para>
+        /// <para>Populates .json file with details of clips to be downloaded.</para>
+        /// </summary>
+        /// <param name="clientData"><see cref="Data()"/> object that should contain an OutputPath, QueryURL,
+        /// ClientID and Authenticaion.</param>
+        /// <returns></returns>
         public static async Task Generate(Data clientData)
         {
             data = clientData;
@@ -49,7 +56,11 @@ namespace Downloader
             GenerateJson(responseContent);
         }
 
-        // Returns the contents of the resopnse to the api call as a string
+        /// <summary>
+        /// Generates Http request to the query URL
+        /// Returns the contents of the response as a string
+        /// </summary>
+        /// <returns></returns>
         private static async Task<string> GetHttpResponse()
         {
             // Creating client
@@ -57,7 +68,7 @@ namespace Downloader
 
             if (data.QueryURL == null)
             {
-                data.GetQuery();
+                await QueryGenerator.Generate(data);
             }
 
 
@@ -77,11 +88,15 @@ namespace Downloader
             return responseContent;
         }
 
-        // Generates or adds to the .json file that contains data on each clip
+        /// <summary>
+        ///  Generates or adds to the .json file that contains data on each clip
+        /// </summary>
+        /// <param name="responseContent"></param>
         private static void GenerateJson(string responseContent)
         {
             // Parses the data from the response to the api request
-            Root responseResult = JsonConvert.DeserializeObject<Root>(responseContent);
+            Root<ClipInfo> responseResult = JsonConvert.DeserializeObject<Root<ClipInfo>>(responseContent);
+
 
             // If the file doesn't exist, we need to create it and add a '[' at the start
             if (!File.Exists(data.JsonFile))
@@ -110,15 +125,15 @@ namespace Downloader
             string json;
 
             // Loops through each ClipInfo object that the api returned
-            for (int i = 0; i < responseResult.data.Count; i++)
+            for (int i = 0; i < responseResult.Data.Count; i++)
             {
                 // Serializes the ClipInfo object into a json style string
-                json = JsonConvert.SerializeObject(responseResult.data[i]);
+                json = JsonConvert.SerializeObject(responseResult.Data[i]);
 
                 // Adds the serialized contents of ClipInfo to the .json file
                 File.AppendAllText(data.JsonFile, json);
 
-                if (i != responseResult.data.Count - 1)
+                if (i != responseResult.Data.Count - 1)
                 {
                     // All objects except the last require a comma at the end of the
                     // object in order to correctly format the array of json objects

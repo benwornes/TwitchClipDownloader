@@ -4,6 +4,6 @@ F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downl
 F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downloader.AssemblyInfoInputs.cache
 F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downloader.AssemblyInfo.cs
 F:\Programming\C#\TwitchClipDownloader\Downloader\bin\Debug\netstandard2.0\Downloader.pdb
-F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downloader.csproj.CoreCompileInputs.cache
 F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downloader.dll
 F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downloader.pdb
+F:\Programming\C#\TwitchClipDownloader\Downloader\obj\Debug\netstandard2.0\Downloader.csproj.CoreCompileInputs.cache

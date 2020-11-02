@@ -54,7 +54,7 @@ namespace Downloader
             // You can get the URL of the location of clip.mp4
             // by removing the -preview.... from the thumbnail url */
 
-            string url = clip.thumbnail_url;
+            string url = clip.ThumbnailURL;
             url = url.Substring(0, url.IndexOf("-preview")) + ".mp4";
             return url;
         }
@@ -63,7 +63,7 @@ namespace Downloader
         {
             WebClient client = new WebClient();
             string url = GetClipURL(clip);
-            string filepath = data.OutputPath + clip.id + ".mp4";
+            string filepath = data.OutputPath + clip.Id + ".mp4";
 
             await client.DownloadFileTaskAsync(new Uri(url), filepath);
         }

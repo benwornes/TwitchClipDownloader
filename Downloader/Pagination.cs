@@ -1,8 +1,11 @@
-﻿namespace Downloader
+﻿using Newtonsoft.Json;
+
+namespace Downloader
 {
     public class Pagination
     {
-        public string cursor { get; set; }
+        [JsonProperty("cursor")]
+        public string Cursor { get; set; }
     }
 
 }

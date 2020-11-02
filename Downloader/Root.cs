@@ -1,10 +1,17 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Downloader
 {
-    public class Root
+    /// <summary>
+    /// Generic Root class that handles json deserialization for any type
+    /// </summary>
+    public class Root<T>
     {
-        public List<ClipInfo> data { get; set; }
-        public Pagination pagination { get; set; }
+        [JsonProperty("data")]
+        public List<T> Data { get; set; }
+
+        [JsonProperty("pagination")]
+        public Pagination Pagination { get; set; }
     }
 }
