@@ -159,7 +159,7 @@ namespace Downloader
             // However, the seconds value is ignored
 
             Console.WriteLine("How many days ago would you like to start at?");
-            int numDays = Convert.ToInt32(Console.ReadLine());
+            double numDays = Convert.ToDouble(Console.ReadLine());
             string startAtTime = GetRFC3339Time(DateTime.Now.AddDays(-numDays));
 
             startedAtQuery = "&started_at=" + startAtTime;
@@ -168,7 +168,7 @@ namespace Downloader
         private static void GetEndedAtTimeQuery()
         {
             Console.WriteLine("How many days would you like to search for?");
-            int numDays = Convert.ToInt32(Console.ReadLine());
+            double numDays = Convert.ToDouble(Console.ReadLine());
 
             // startedAtQuery = "&started_at=yyyy-MM-ddTHH:mm:ss"
             // We need to pass in the time, not the &started_at=
