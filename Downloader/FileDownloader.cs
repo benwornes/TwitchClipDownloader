@@ -14,18 +14,17 @@ namespace Downloader
         public async static Task DownloadAllFiles(Data clientData)
         {
             data = clientData;
-
+            GetData();
             data.OutputFolderExists();
-
 
             // Deserialize .json file and get ClipInfo list
             List<ClipInfo> clips = JsonConvert.DeserializeObject<List<ClipInfo>>(File.ReadAllText(data.JsonFile));
 
             tasks = new List<Task>();
 
-            foreach (ClipInfo clip in clips)
+            for (int i = 0; i < clips.Count; i++)
             {
-                tasks.Add(DownloadFilesAsync(clip));
+                tasks.Add(DownloadFilesAsync(clips[i], i + 1));
             }
 
             await Task.WhenAll(tasks);
@@ -59,11 +58,11 @@ namespace Downloader
             return url;
         }
                 
-        private async static Task DownloadFilesAsync(ClipInfo clip)
+        private async static Task DownloadFilesAsync(ClipInfo clip, int clipNum)
         {
             WebClient client = new WebClient();
             string url = GetClipURL(clip);
-            string filepath = data.OutputPath + clip.Id + ".mp4";
+            string filepath = String.Format("{0}{1}-{2}.mp4", data.OutputPath, clipNum.ToString("000"), clip.Id);
 
             await client.DownloadFileTaskAsync(new Uri(url), filepath);
         }
