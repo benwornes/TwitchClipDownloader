@@ -172,7 +172,9 @@ namespace Downloader
 
             // startedAtQuery = "&started_at=yyyy-MM-ddTHH:mm:ss"
             // We need to pass in the time, not the &started_at=
-            DateTime startedAtTime = XmlConvert.ToDateTime(startedAtQuery.Substring(12, startedAtQuery.Length - 12));
+            string startedAtString = startedAtQuery.Substring(12, startedAtQuery.Length - 12);
+            DateTime startedAtTime = XmlConvert.ToDateTime(startedAtString, "yyyy-MM-ddTHH:mm:ss");
+
             string endedAtTime = GetRFC3339Time(startedAtTime.AddDays(numDays));
 
             endedAtQuery = "&ended_at=" + endedAtTime;
