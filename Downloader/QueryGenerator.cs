@@ -164,16 +164,16 @@ namespace Downloader
 
             startedAtQuery = "&started_at=" + startAtTime;
         }
-
+        
         private static void GetEndedAtTimeQuery()
         {
             Console.WriteLine("How many days would you like to search for?");
             double numDays = Convert.ToDouble(Console.ReadLine());
 
-            // startedAtQuery = "&started_at=yyyy-MM-ddTHH:mm:ss"
+            // startedAtQuery = "&started_at=yyyy-MM-ddTHH:mm:ssZ"
             // We need to pass in the time, not the &started_at=
             string startedAtString = startedAtQuery.Substring(12, startedAtQuery.Length - 12);
-            DateTime startedAtTime = XmlConvert.ToDateTime(startedAtString, "yyyy-MM-ddTHH:mm:ss");
+            DateTime startedAtTime = XmlConvert.ToDateTime(startedAtString, "yyyy-MM-ddTHH:mm:ssZ");
 
             string endedAtTime = GetRFC3339Time(startedAtTime.AddDays(numDays));
 
